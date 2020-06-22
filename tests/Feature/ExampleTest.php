@@ -3,19 +3,21 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use Store\Models\User;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testBasicTest()
     {
-        $response = $this->get('/');
+        $user = factory(User::class)->create(['email' => 'user@test.com', 'password' => Hash::make('secret')]);
+        $response = $this->post('/login', [
+            'email' => 'user@test.com',
+            'password' => 'secret',
+        ]);
 
-        $response->assertStatus(200);
+        $response->assertRedirect('/home');
+        $this->assertAuthenticatedAs($user);
     }
 }
