@@ -12,7 +12,7 @@ class ProductController extends Controller
             'owner_id' => auth()->user()->id,
             'title' => request('title'),
             'sku' => request('sku'),
-            'price' => request('price'),
+            'price' => (int) (request('price') * 100),
         ]);
 
         return redirect("/products/{$product->id}");
@@ -23,7 +23,7 @@ class ProductController extends Controller
         $product->update([
             'title' => request('title'),
             'sku' => request('sku'),
-            'price' => request('price'),
+            'price' => (int) (request('price') * 100),
         ]);
 
         return redirect("/products/{$product->id}");

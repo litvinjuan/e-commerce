@@ -3,9 +3,8 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
-use Store\Models\User;
 use Store\Models\Product;
+use Store\Models\User;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
@@ -20,7 +19,7 @@ class ProductTest extends TestCase
         $response = $this->actingAs($user)->post('/products', [
             'title' => 'My Product Title',
             'sku' => 'a0001',
-            'price' => 19999, // 199,99
+            'price' => 199.99,
         ]);
 
         $product = Product::first();
@@ -42,7 +41,7 @@ class ProductTest extends TestCase
         $response = $this->actingAs($user)->post("/products/{$product->id}/update", [
             'title' => 'My New Product Title',
             'sku' => 'a0002',
-            'price' => 29999, // 199,99
+            'price' => 299.99,
         ]);
 
         $response->assertRedirect("/products/{$product->id}");
