@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Store\Models\Admin;
 use Store\Models\Customer;
-use Store\Models\Supplier;
 use Store\Models\User;
 use Tests\TestCase;
 
@@ -59,22 +58,6 @@ class AuthTest extends TestCase
         $response->assertRedirect($user->loginRedirectRoute());
         $this->assertAuthenticatedAs($user);
         $this->assertInstanceOf(Customer::class, $user);
-    }
-
-    /** @test */
-    public function testSuppliersCanLogin()
-    {
-        /** @var User $user */
-        $user = factory(Supplier::class)->create();
-
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'secret',
-        ]);
-
-        $response->assertRedirect($user->loginRedirectRoute());
-        $this->assertAuthenticatedAs($user);
-        $this->assertInstanceOf(Supplier::class, $user);
     }
 
     /** @test */

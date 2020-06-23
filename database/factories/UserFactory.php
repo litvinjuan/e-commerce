@@ -9,7 +9,7 @@ use Store\Models\User;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'type' => $faker->randomElement(['admin', 'customer', 'supplier']),
+        'type' => $faker->randomElement(['admin', 'customer']),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => Hash::make('secret'),

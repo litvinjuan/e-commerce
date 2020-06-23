@@ -24,7 +24,6 @@ class User extends Authenticatable
     protected $childTypes = [
         'admin' => Admin::class,
         'customer' => Customer::class,
-        'supplier' => Supplier::class,
     ];
 
     public function loginRedirectRoute(): string

@@ -9,4 +9,9 @@ use Parental\HasParent;
 class Customer extends User
 {
     use HasParent;
+
+    public function loginRedirectRoute(): string
+    {
+        return '/';
+    }
 }
