@@ -14,18 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('/products')->group(function () {
-
     Route::post('/', 'ProductController@create');
     Route::get('/{product}', 'ProductController@view');
     Route::post('/{product}/update', 'ProductController@update');
     Route::post('/{product}/delete', 'ProductController@delete');
-
 });
 
 Route::prefix('/')->group(function () {
-
     Route::post('/login', 'AuthController@login');
     Route::post('/register', 'AuthController@register');
     Route::post('/logout', 'AuthController@logout');
-
 });

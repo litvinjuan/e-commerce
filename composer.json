@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2.5",
         "fideloper/proxy": "^4.2",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
@@ -35,13 +36,13 @@
         },
         "hooks": {
             "pre-commit": [
-                "php-cs-fixer fix .",
-                "./vendor/bin/phpunit"
+                "docker-compose run --rm php ./vendor/bin/php-cs-fixer fix .",
+                "docker-compose run --rm php ./vendor/bin/phpunit"
             ],
             "pre-push": [
-                "php-cs-fixer fix --dry-run ."
+                "docker-compose run --rm php ./vendor/bin/php-cs-fixer fix --dry-run ."
             ],
-            "post-merge": "composer install"
+            "post-merge": "docker-compose run --rm composer install"
         }
     },
     "autoload": {
