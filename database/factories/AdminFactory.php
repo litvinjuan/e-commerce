@@ -5,11 +5,10 @@
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Store\Models\User;
+use Store\Models\Admin;
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Admin::class, function (Faker $faker) {
     return [
-        'type' => $faker->randomElement(['admin', 'customer', 'supplier']),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => Hash::make('secret'),

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Store\Models\Customer;
 use Store\Models\User;
 
 class AuthController extends Controller
@@ -19,19 +20,23 @@ class AuthController extends Controller
             return redirect()->back()->with('Wrong email or password.');
         }
 
-        return redirect('/home');
+        /** @var User $user */
+        $user = Auth::user();
+
+        return redirect($user->loginRedirectROute());
     }
 
     public function register()
     {
-        $user = User::query()->create([
+        /** @var Customer $user */
+        $user = Customer::query()->create([
             'email' => request('email'),
             'password' => Hash::make(request('password')),
         ]);
 
         Auth::login($user, true);
 
-        return redirect('/home');
+        return redirect($user->loginRedirectRoute());
     }
 
     public function logout()
